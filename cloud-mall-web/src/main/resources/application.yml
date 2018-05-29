@@ -1,0 +1,87 @@
+### 服务端口
+server:
+  port: 9090
+
+## Zipkin 配置
+### 配置 Zipkin 服务器
+#zipkin:
+#  server:
+#    host: localhost
+#    port: 9040
+
+## 服务提供方
+spring:
+  application:
+    name: cloud-mall-web
+  kafka:
+    BOOTSTRAP-SERVERS: localhost:9092
+    consumer:
+      group-id: cloud-mall-web-user-group
+      clientId: cloud-mall-web
+#    producer:
+#      value-serializer: com.wittychen.cloudmall.web.serializer.ObjectSerializer
+  sleuth:
+    sampler:
+      percentage: 1
+  cloud:
+    stream:
+      bindings:
+        sleuth:
+          binder: kafka
+
+#  zipkin:
+#    base-url: http://${zipkin.server.host}:${zipkin.server.port}
+#    enabled: true
+
+
+### 管理安全失效
+management:
+  security:
+    enabled: false
+
+## 启用/ restart端点重新启动应用程序上下文
+## endpoints.restart.enabled = true
+#endpoints:
+#  restart:
+#    enabled: true
+
+user:
+  service:
+    id: 1
+    name: wittychen
+
+## Spring Cloud Eureka 客户端 注册到 Eureka 服务器
+#eureka:
+#  client:
+#    serviceUrl:
+#      defaultZone: http://localhost:9020/eureka
+
+## 配置连接 Eureka 服务器
+## 配置多个 Eureka 注册中心，以"," 分割
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:9020/eureka,http://localhost:9021/eureka
+
+
+service:
+  name:
+    user: cloud-mall-user-service
+
+feign:
+  hystrix:
+    enabled: true
+
+## Kafka 生产者配置
+#spring:
+#  kafka:
+#    BOOTSTRAP-SERVERS: localhost:9092
+#    consumer:
+#      group-id: cloud-mall-web-user-group
+#      clientId: user-service-client
+
+# 生产者 值的序列化
+#spring:
+#  kafka:
+#    producer:
+#      value-serializer: com.wittychen.cloudmall.web.serializer.ObjectSerializer

@@ -1,0 +1,36 @@
+## 配置服务器端口
+server:
+  port: 9010
+
+## 配置服务器应用名称
+## 基于文件系统
+## 配置服务器文件系统git仓库
+## ${user.dir}减少平台文件系统的不一致
+# spring.cloud.config.server.git.uri = ${user.dir}/src/main/resources/configs
+
+## 配置服务器远程 Git 仓库（GitHub）
+## spring.cloud.config.server.git.uri = https://github.com/wittychen/cloud-mall-config-properties
+## 强制拉去 Git 内容
+## spring.cloud.config.server.git.force-pull = true
+spring:
+  application:
+    name: cloud-mall-config-server
+  cloud:
+    config:
+      server:
+        git:
+          uri: ${user.dir}/src/main/resources/configs
+
+## 关闭管理端actuator的安全
+## /env,/health端口完全开放
+management:
+  security:
+    enabled: false
+
+## Spring Cloud Eureka 客户端 注册到 Eureka 服务器
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:9020/eureka,http://localhost:9021/eureka
+
+

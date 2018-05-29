@@ -1,0 +1,17 @@
+# per1 完整配置
+
+## 配置 服务器端口
+## per1 端口 9021
+server:
+  port: 9021
+
+## per1 主机：localhost , 端口 9021
+per0:
+  server:
+    host: localhost
+    port: 9020
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://${per0.server.host}:${per0.server.port}/eureka
